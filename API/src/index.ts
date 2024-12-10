@@ -1,18 +1,20 @@
-import http from 'http'
 import { setupMQTT } from './mqttClient'
 import { setupWebSocket } from './websocket'
+import express from 'express'
+import cors from 'cors'
 
 const startServer = async () => {
-  const server = http.createServer()
+  const app = express()
+  app.use(cors())
 
   // Configurar WebSocket
-  setupWebSocket(server)
+  setupWebSocket()
 
   // Configurar MQTT
   await setupMQTT()
 
   // Iniciar o servidor HTTP
-  server.listen(3000, () => {
+  app.listen(3001, () => {
     console.log('Server running on http://localhost:3000')
   })
 }

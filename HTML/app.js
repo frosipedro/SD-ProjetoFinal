@@ -7,33 +7,59 @@ const sensors = {
 // Conecta ao WebSocket
 const ws = new WebSocket('ws://localhost:3000')
 
+ws.onopen = function (event) {
+  console.log('Connected to WebSocket')
+}
+
 // Atualiza os dados na interface
 ws.onmessage = (event) => {
   const data = JSON.parse(event.data)
   console.log('Received data:', data)
-  const { sensorType, value, timestamp } = data
+  const { sensor_type, value, timestamp } = data
 
-  if (sensors[sensorType]) {
+  if (sensors[sensor_type]) {
     // Adiciona ao histórico (limita a 5 valores)
-    sensors[sensorType].history.unshift({ value, timestamp })
-    if (sensors[sensorType].history.length > 5) {
-      sensors[sensorType].history.pop()
+    sensors[sensor_type].history.unshift({ value, timestamp })
+    if (sensors[sensor_type].history.length > 5) {
+      sensors[sensor_type].history.pop()
     }
 
     // Atualiza o valor atual
-    const sensorDiv = document.getElementById(sensorType)
-    const currentValue = sensorDiv.querySelector('.current-value')
-    currentValue.textContent = `${value} ${sensors[sensorType].unit}`
+    const sensorDiv = document.getElementById(sensor_type)
+    if (sensorDiv) {
+      const currentValue = sensorDiv.querySelector('.current-value')
+      if (currentValue) {
+        currentValue.textContent = `${value} ${sensors[sensor_type].unit}`
+        console.log(
+          `Updated current value for ${sensor_type}: ${value} ${sensors[sensor_type].unit}`
+        )
+      } else {
+        console.error(
+          `Element with class 'current-value' not found in ${sensor_type} div`
+        )
+      }
 
-    // Atualiza o histórico
-    const historyList = sensorDiv.querySelector('.history')
-    historyList.innerHTML = sensors[sensorType].history
-      .map(
-        (entry) =>
-          `<li>${entry.value} ${sensors[sensorType].unit} - ${new Date(
-            entry.timestamp
-          ).toLocaleTimeString()}</li>`
-      )
-      .join('')
+      // Atualiza o histórico
+      const historyList = sensorDiv.querySelector('.history')
+      if (historyList) {
+        historyList.innerHTML = sensors[sensor_type].history
+          .map(
+            (entry) =>
+              `<li>${entry.value} ${sensors[sensor_type].unit} - ${new Date(
+                entry.timestamp
+              ).toLocaleTimeString()}</li>`
+          )
+          .join('')
+        console.log(`Updated history for ${sensor_type}`)
+      } else {
+        console.error(
+          `Element with class 'history' not found in ${sensor_type} div`
+        )
+      }
+    } else {
+      console.error(`Element with ID '${sensor_type}' not found`)
+    }
+  } else {
+    console.error(`Sensor type '${sensor_type}' not recognized`)
   }
 }
