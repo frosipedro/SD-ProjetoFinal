@@ -1,0 +1,52 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #1e2a38;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.dashboard {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.sensor {
+  background-color: #2b3b4f;
+  border-radius: 10px;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+}
+
+.sensor h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.sensor .current-value {
+  font-size: 2em;
+  margin: 10px 0;
+}
+
+.sensor h3 {
+  font-size: 1em;
+  margin-bottom: 10px;
+  color: #aaa;
+}
+
+.sensor .history {
+  list-style: none;
+  padding: 0;
+  font-size: 0.9em;
+}
+
+.sensor .history li {
+  margin: 5px 0;
+  color: #ccc;
+}
