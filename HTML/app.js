@@ -18,9 +18,9 @@ ws.onmessage = (event) => {
   const { sensor_type, value, timestamp } = data
 
   if (sensors[sensor_type]) {
-    // Adiciona ao histórico (limita a 5 valores)
+    // Adiciona ao histórico (limita a 10 valores)
     sensors[sensor_type].history.unshift({ value, timestamp })
-    if (sensors[sensor_type].history.length > 5) {
+    if (sensors[sensor_type].history.length > 10) {
       sensors[sensor_type].history.pop()
     }
 

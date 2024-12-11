@@ -1,43 +1,77 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #1e2a38;
-  color: #fff;
+  background-color: #121212;
+  color: #ffffff;
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
-.dashboard {
+header {
+  text-align: center;
+  margin: 20px 0;
+  width: 100%;
+}
+
+header h1 {
+  font-size: 2em;
+  color: #ffffff;
+}
+
+main.dashboard {
   display: flex;
   gap: 20px;
   padding: 20px;
+  background-color: #1e1e1e;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .sensor {
-  background-color: #2b3b4f;
+  background-color: #2a2a2a;
   border-radius: 10px;
   padding: 20px;
   width: 200px;
   text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.sensor:hover {
+  transform: scale(1.05);
+  background-color: #3a3a3a;
 }
 
 .sensor h2 {
   font-size: 1.5em;
   margin-bottom: 10px;
+  color: #ffcc00;
 }
 
 .sensor .current-value {
   font-size: 2em;
   margin: 10px 0;
+  color: #ffcc00;
 }
 
 .sensor h3 {
   font-size: 1em;
   margin-bottom: 10px;
-  color: #aaa;
+  color: #aaaaaa;
 }
 
 .sensor .history {
@@ -48,5 +82,26 @@ body {
 
 .sensor .history li {
   margin: 5px 0;
-  color: #ccc;
+  padding: 5px;
+  background-color: #3a3a3a;
+  border-radius: 5px;
+  color: #cccccc;
+  transition: background-color 0.3s;
+}
+
+.sensor .history li:hover {
+  background-color: #4a4a4a;
+}
+
+footer {
+  text-align: center;
+  margin-top: 20px;
+  color: #aaaaaa;
+  width: 100%;
+  padding: 10px 0;
+  background-color: #1e1e1e;
+}
+
+footer p {
+  margin: 0;
 }
